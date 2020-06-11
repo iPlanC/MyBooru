@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>booru</title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+        <script type="text/javascript">
+            window.onload = function() {
+                var i = 0;
+                document.write("<h1>头像</h1>");
+                document.write("<a href=\".\\..\\index.html\"><h3>返回</h3></a>");
+                var url = ".\\头像\\data.json";
+                var request = new XMLHttpRequest();
+                request.open("get", url);
+                request.send(null);
+                request.onload = function() {
+                    if (request.status == 200) {
+                        var json = JSON.parse(request.responseText);
+                        document.write("<h3>img</h3><hr/>");
+                        for (i = 0; i < json.length; i++) {
+                            var filename = json[i].split(".");
+                            if (filename[1] == "jpg" || filename[1] == "png" || filename[1] == "gif") {
+                                document.write("<a href='.\\头像\\" + json[i] + "'> <img src='.\\头像\\" + json[i] + "' width=160px height=90px/> </a>");
+                            }
+                        }
+                        document.write("<hr/>");
+                        document.write("<h3>video</h3>");
+                        for (i = 0; i < json.length; i++) {
+                            var filename = json[i].split(".");
+                            if (filename[1] == "mp4" || filename[1] == "webm") {
+                                document.write("<a href='.\\头像\\" + json[i] + "'> <video src='.\\头像\\" + json[i] + "' width=320px height=180px autoload='metadata'></video> </a>");
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+	</body>
+</html>
