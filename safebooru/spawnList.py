@@ -11,26 +11,19 @@ for each_path in folders:
             result = os.listdir(each_path)
             result.remove("data.json")
             try:
-                # result.sort(key= lambda x:int(x[:-4]))
-                result.sort()
+                result.sort(key= lambda x:int(x[:-4]))
             except ValueError:
                 print("1\t" + os.path.realpath(each_path) + "\\data.json")
-                for resource in result:
-                    if resource == "data.json" or resource == "spawnList.py" or resource == "desktop.ini":
-                        continue
-                    file.write("\"")
-                    file.write(resource)
-                    file.write("\", \n")
-                file.write("\"end_of_list\"\n]")
+                result.sort()
             else :
                 print("2\t" + os.path.realpath(each_path) + "\\data.json")
-                for resource in result:
-                    if resource == "data.json" or resource == "spawnList.py" or resource == "desktop.ini":
-                        continue
-                    file.write("\"")
-                    file.write(resource)
-                    file.write("\", \n")
-                file.write("\"end_of_list\"\n]")
+            for resource in result:
+                if resource == "data.json" or resource == "spawnList.py" or resource == "desktop.ini":
+                    continue
+                file.write("\"")
+                file.write(resource)
+                file.write("\", \n")
+            file.write("\"end_of_list\"\n]")
     except:
         continue
 print("finished")
